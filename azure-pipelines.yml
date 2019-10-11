@@ -29,7 +29,8 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: publish    
+    command: publish
+    projects: "GithubActionsTest/GithubActionsTest.sln" 
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
