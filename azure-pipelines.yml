@@ -20,4 +20,5 @@ steps:
   displayName: Build Me Now
   inputs:
     command: 'build'
+    projects: "GithubActionsTest\\GithubActionsTest.sln" 
     arguments: '--configuration  $(buildConfiguration)'
