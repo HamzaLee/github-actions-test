@@ -15,3 +15,9 @@ variables:
 steps:
 - script: dotnet build "GithubActionsTest\GithubActionsTest.sln" --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Build Me Now
+  inputs:
+    command: 'build'
+    arguments: '--configuration  $(buildConfiguration)'
