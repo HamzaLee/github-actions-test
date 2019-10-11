@@ -26,15 +26,3 @@ steps:
     command: 'test'
     projects: "GithubActionsTest/GithubActionsTest.sln" 
     arguments: '--configuration  $(buildConfiguration) --collect "Code coverage"'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: publish
-    projects: "GithubActionsTest/GithubActionsTest.sln" 
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myArtifact'
