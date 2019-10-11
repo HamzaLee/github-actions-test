@@ -17,8 +17,20 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: Build Me Now
+  displayName: Build
   inputs:
     command: 'build'
     projects: "GithubActionsTest/GithubActionsTest.sln" 
     arguments: '--configuration  $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: 'test'
+    projects: "GithubActionsTest/GithubActionsTest.sln" 
+    arguments: '--configuration  $(buildConfiguration) --collect "Code coverage"'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'myArtifact'
