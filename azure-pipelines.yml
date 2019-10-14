@@ -55,3 +55,10 @@ steps:
     publishVstsFeed: 'HamzaLitayem0516'
     versioningScheme: 'off'
     allowPackageConflicts: true
+
+- task: NuGetCommand@2
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: 'NuGetConnnection'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
