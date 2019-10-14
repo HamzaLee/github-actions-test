@@ -12,18 +12,28 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-
+  solutionPath: "GithubActionsTest/GithubActionsTest.sln"
+  projectToPackPath: "GithubActionsTest/GithubActionsTest/GithubActionsTest.csproj"
 steps:
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: 'build'
-    projects: "GithubActionsTest/GithubActionsTest.sln" 
+    projects: '$(solutionPath)'
     arguments: '--configuration  $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: 'test'
-    projects: "GithubActionsTest/GithubActionsTest.sln" 
+    projects: '$(solutionPath)'
     arguments: '--configuration  $(buildConfiguration) --collect "Code coverage"'
+
+- task: DotNetCoreCLI@2
+  displayName: "dotnet pack"
+  inputs:
+    command: 'pack'
+    arguments: '--configuration $(buildConfiguration)'
+    packagesToPack: '$(projectToPackPath)'
+    nobuild: true
+    versioningScheme: 'off'
