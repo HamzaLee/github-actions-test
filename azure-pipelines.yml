@@ -37,7 +37,8 @@ steps:
     command: 'pack'
     arguments: '--configuration $(buildConfiguration)'
     packagesToPack: '$(projectToPackPath)'
-   
+    nobuild: true
+    versioningScheme: 'off'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
