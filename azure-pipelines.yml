@@ -14,7 +14,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   solutionPath: "GithubActionsTest/GithubActionsTest.sln"
-  projectToPackPath: "GithubActionsTest/GithubActionsTest/GithubActionsTest.csproj"
+  projectToPackPath: "GithubActionsTest/ClassLibrary1/ClassLibrary1.csproj"
 
 steps:
 - task: DotNetCoreCLI@2
