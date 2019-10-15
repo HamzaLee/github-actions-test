@@ -45,9 +45,13 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
 
+- script: dotnet nuget push *.nupkg -k oy2fstx6a2nimltaor2qqixqi2ee5iku3jprkxef2wp7iu -s https://api.nuget.org/v3/index.json
+  displayName: push to nuget
+
 - task: NuGetCommand@2
   inputs:
     command: push
     nuGetFeedType: external
     publishFeedCredentials: 'NugetConnection'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+
