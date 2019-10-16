@@ -1,9 +1,3 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
-
 trigger:
 - master
 - develop
@@ -30,28 +24,3 @@ steps:
     command: 'test'
     projects: '$(solutionPath)'
     arguments: '--configuration  $(buildConfiguration) --collect "Code coverage"'
-
-- task: DotNetCoreCLI@2
-  displayName: "dotnet pack"
-  inputs:
-    command: 'pack'
-    arguments: '--configuration $(buildConfiguration)'
-    packagesToPack: '$(projectToPackPath)'
-    nobuild: true
-    versioningScheme: 'off'
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-
-- script: dotnet nuget push *.nupkg -k oy2fstx6a2nimltaor2qqixqi2ee5iku3jprkxef2wp7iu -s https://api.nuget.org/v3/index.json
-  displayName: push to nuget
-
-- task: NuGetCommand@2
-  inputs:
-    command: push
-    nuGetFeedType: external
-    publishFeedCredentials: 'NugetConnection'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
-
