@@ -3,11 +3,12 @@ branches:
   only:
   - master
   - develop
-image:
-- Visual Studio 2019
-- Ubuntu
+image: Visual Studio 2019
 configuration: Release
 platform: Any CPU
+environment:
+  NUGET_API_KEY:
+    secure: JQe2N9V5L/R+8ivK8QhZEQxgae1dPopyLyaVBs4m+ki5bb7BgIZEmzNWx4p3oAbEHpc+o9vnex0tWSujhbgjNrjVbmK+0aifkCyO1n+LUuw=
 before_build:
 - ps: dotnet restore GithubActionsTest/GithubActionsTest.sln
 build:
@@ -19,7 +20,7 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: 5S6VXalKh2dg28xCNtZ49XZaWoXd/MJH8wBRejZToBEHKGUL8duYzkRix6b4sRZy
+    secure: MY9CI5+u+mwEe4G/qdR14A==
   skip_symbols: true
   artifact: nuget
   on:
