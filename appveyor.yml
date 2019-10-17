@@ -1,0 +1,26 @@
+version: 1.0.{build}
+branches:
+  only:
+  - master
+  - develop
+image:
+- Visual Studio 2019
+- Ubuntu
+configuration: Release
+platform: Any CPU
+before_build:
+- ps: dotnet restore GithubActionsTest/GithubActionsTest.sln
+build:
+  project: GithubActionsTest/GithubActionsTest.sln
+  verbosity: minimal
+artifacts:
+- path: .\**\*.nupkg
+  name: nuget
+deploy:
+- provider: NuGet
+  api_key:
+    secure: 5S6VXalKh2dg28xCNtZ49XZaWoXd/MJH8wBRejZToBEHKGUL8duYzkRix6b4sRZy
+  skip_symbols: true
+  artifact: nuget
+  on:
+    branch: master
