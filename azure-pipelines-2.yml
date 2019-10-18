@@ -9,13 +9,12 @@ stages:
   jobs:
   - job:
     pool:
-      vmImage: 'windows-latest'   
-
-    displayName: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+      vmImage: 'windows-latest'
+    
     steps:
     - checkout: none
     #- script: echo "$(Pipeline.Workspace)"
     #- script: echo "$(Build.ArtifactStagingDirectory)"
     #- script: echo "$(Build.BuildNumber)"
     #- script: echo "$(Build.BuildId)"
-    - script: echo "$(System.TeamProject)_$(Build.DefinitionName)_$(Build.SourceBranchName)_$(System.Date:yyyyMMdd)_$(Build.Rev:.r)_$(System.Rev:.r)"
+    - script: echo "$(Build.SourceBranchName)____$(Build.BuildId)____$(Build.BuildNumber)"
