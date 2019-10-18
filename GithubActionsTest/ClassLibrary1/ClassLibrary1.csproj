@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <VersionPrefix>0.0.2</VersionPrefix>
+    <VersionPrefix>0.0.3-alpha1</VersionPrefix>
     <PackageId>HamzaLee.ClassLibrary1</PackageId>
   </PropertyGroup>
 
