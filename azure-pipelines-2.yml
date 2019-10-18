@@ -17,3 +17,4 @@ stages:
     - script: echo "$(Build.ArtifactStagingDirectory)"
     - script: echo "$(Build.BuildNumber)"
     - script: echo "$(Build.BuildId)"
+    - script: echo "$(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)"
