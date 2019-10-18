@@ -11,6 +11,7 @@ stages:
     pool:
       vmImage: 'windows-latest'   
 
+    displayName: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
     steps:
     - checkout: none
     - script: echo "$(Pipeline.Workspace)"
