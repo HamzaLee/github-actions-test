@@ -1,0 +1,61 @@
+trigger:
+- master
+- develop
+
+stages:
+
+- stage: 'Build'
+  variables:
+    buildConfiguration: 'Release'
+    solutionPath: "GithubActionsTest/GithubActionsTest.sln"
+    projectToPackPath: "GithubActionsTest/ClassLibrary1/ClassLibrary1.csproj"
+
+  jobs:
+  - job:
+    pool:
+      vmImage: 'windows-latest'
+
+    workspace:
+      clean: all
+
+    steps:
+
+    - task: DotNetCoreCLI@2
+      displayName: "Build Solution"
+      inputs:
+        command: build
+        projects: '$(solutionPath)'
+        arguments: '--configuration $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Create NuGet Package - Release Version'
+      inputs:
+        command: pack
+        packagesToPack: '$(projectToPackPath)'
+        packDirectory: '$(Build.ArtifactStagingDirectory)/packages/releases'
+        arguments: '--configuration $(buildConfiguration)'
+        nobuild: true 
+
+    - publish: '$(Build.ArtifactStagingDirectory)/packages'
+      artifact: 'packages'
+
+- stage: 'PublishReleaseNuGetPackage'
+  displayName: 'Publish Release NuGet Package'
+  dependsOn: 'Build'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment:
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'nuget-org'
+    strategy:
+     runOnce:
+       deploy:
+         steps:
+         - task: NuGetCommand@2
+           displayName: 'Push NuGet Package'
+           inputs:
+             command: 'push'
+             packagesToPush: '$(Pipeline.Workspace)/packages/releases/*.nupkg'
+             nuGetFeedType: 'external'
+             publishFeedCredentials: 'NuGet'

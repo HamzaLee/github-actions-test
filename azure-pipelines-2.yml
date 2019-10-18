@@ -1,0 +1,20 @@
+trigger:
+- master
+- develop
+
+stages:
+
+- stage: 'Build' 
+
+  jobs:
+  - job:
+    pool:
+      vmImage: 'windows-latest'
+    
+    steps:
+    - checkout: none
+    #- script: echo "$(Pipeline.Workspace)"
+    #- script: echo "$(Build.ArtifactStagingDirectory)"
+    #- script: echo "$(Build.BuildNumber)"
+    #- script: echo "$(Build.BuildId)"
+    - script: echo "$(Build.SourceBranchName)____$(Build.BuildId)____$(Build.BuildNumber)"
