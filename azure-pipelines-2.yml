@@ -16,4 +16,4 @@ stages:
     - script: echo "$(Pipeline.Workspace)"
     - script: echo "$(Build.ArtifactStagingDirectory)"
     - script: echo "$(Build.BuildNumber)"
-    - script: echo "$(Build.Build)"
+    - script: echo "$(Build.BuildId)"
