@@ -42,7 +42,7 @@ stages:
 - stage: 'PublishReleaseNuGetPackage'
   displayName: 'Publish Release NuGet Package'
   dependsOn: 'Build'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'master'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:
   - deployment:
     pool:
