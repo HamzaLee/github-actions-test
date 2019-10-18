@@ -14,8 +14,8 @@ stages:
     displayName: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
     steps:
     - checkout: none
-    - script: echo "$(Pipeline.Workspace)"
-    - script: echo "$(Build.ArtifactStagingDirectory)"
-    - script: echo "$(Build.BuildNumber)"
-    - script: echo "$(Build.BuildId)"
-    - script: echo "$(TeamProject)_$(Build.DefinitionName)_$(Build.SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)"
+    #- script: echo "$(Pipeline.Workspace)"
+    #- script: echo "$(Build.ArtifactStagingDirectory)"
+    #- script: echo "$(Build.BuildNumber)"
+    #- script: echo "$(Build.BuildId)"
+    - script: echo "$(System.TeamProject)_$(Build.DefinitionName)_$(Build.SourceBranchName)_$(System.Date:yyyyMMdd)_$(Build.Rev:.r)_$(System.Rev:.r)"
